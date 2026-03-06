@@ -1,0 +1,300 @@
+# =============================================================================
+# CARTAS DE GESTORAS - Template de Input Manual
+# =============================================================================
+# Atualizar mensalmente (10-15 min) com base nas cartas que você já lê.
+#
+# USO: VALIDAÇÃO/VETO, não trigger de compra!
+# - Se sua posição contradiz Verde + SPX + Kinea → review obrigatório
+# - Se consenso cartas confirma sua posição → confiança maior
+#
+# Edge real: ~25% (validação qualitativa)
+#
+# =============================================================================
+# FONTES DE CARTAS
+# =============================================================================
+# PRINCIPAL: Telegram "CARTAS - Leia as Cartas dos Gestores"
+#   - Link: https://linktr.ee/danielgues (procurar "CARTAS")
+#   - Conteúdo: Cartas dos principais fundos BR e exterior
+#   - Atualização: Postagens diárias
+#
+# ALTERNATIVAS:
+#   - Sites de RI das gestoras
+#   - Mailing lists das assets
+#   - InfoMoney / Valor Econômico (resumos)
+#
+# OUTROS GRUPOS ÚTEIS DO MESMO AUTOR:
+#   - "MACRO - Macroeconomia & News" - notícias macro
+#   - "FIIs, Renda Fixa, Leilões, Imóveis etc" - renda fixa
+#   - "RELATÓRIOS FINANCEIROS" - releases e apresentações (R$ 15/mês)
+#   - "BIBLIOTECA - Biblioteca Financeira" - livros e materiais
+# =============================================================================
+
+data_atualizacao: "2026-01-15"
+periodo_referencia: "Janeiro 2026"
+
+# =============================================================================
+# GESTORAS BRASILEIRAS
+# =============================================================================
+
+gestoras_brasil:
+  # ---------------------------------------------------------------------------
+  # VERDE ASSET (Luis Stuhlberger)
+  # ---------------------------------------------------------------------------
+  - nome: "Verde Asset"
+    carta_data: "2026-01-10"
+
+    # Visão macro
+    macro:
+      brasil_juros: "hawkish"        # dovish | neutro | hawkish
+      brasil_fiscal: "preocupado"    # otimista | neutro | preocupado | pessimista
+      brasil_cambio: "neutro"        # otimista | neutro | pessimista
+      us_economia: "soft_landing"    # recessao | soft_landing | no_landing
+      us_fed: "neutro"               # dovish | neutro | hawkish
+
+    # Posicionamento
+    posicoes:
+      renda_fixa_brasil: "comprado"       # muito_vendido | vendido | neutro | comprado | muito_comprado
+      acoes_brasil: "neutro"
+      dolar: "neutro"
+      acoes_us: "neutro"
+      commodities: "neutro"
+
+    # Setores (se mencionado)
+    setores:
+      overweight: []
+      underweight: []
+
+    # Quotes chave (máx 3)
+    quotes:
+      - "Juro real acima de 7% é atrativo para longo prazo"
+
+    # Nível de confiança da carta (0-1)
+    confianca: 0.7
+
+    comentario: "Carta cautelosa mas construtiva para RF longa"
+
+  # ---------------------------------------------------------------------------
+  # SPX CAPITAL
+  # ---------------------------------------------------------------------------
+  - nome: "SPX Capital"
+    carta_data: null  # Ainda não saiu
+    macro:
+      brasil_juros: null
+      brasil_fiscal: null
+      brasil_cambio: null
+      us_economia: null
+      us_fed: null
+    posicoes:
+      renda_fixa_brasil: null
+      acoes_brasil: null
+      dolar: null
+      acoes_us: null
+      commodities: null
+    setores:
+      overweight: []
+      underweight: []
+    quotes: []
+    confianca: null
+    comentario: "Aguardando carta trimestral"
+
+  # ---------------------------------------------------------------------------
+  # KINEA
+  # ---------------------------------------------------------------------------
+  - nome: "Kinea"
+    carta_data: null
+    macro:
+      brasil_juros: null
+      brasil_fiscal: null
+      brasil_cambio: null
+      us_economia: null
+      us_fed: null
+    posicoes:
+      renda_fixa_brasil: null
+      acoes_brasil: null
+      dolar: null
+      acoes_us: null
+      commodities: null
+    setores:
+      overweight: []
+      underweight: []
+    quotes: []
+    confianca: null
+    comentario: null
+
+  # ---------------------------------------------------------------------------
+  # IBIUNA
+  # ---------------------------------------------------------------------------
+  - nome: "Ibiuna"
+    carta_data: null
+    macro:
+      brasil_juros: null
+      brasil_fiscal: null
+      brasil_cambio: null
+      us_economia: null
+      us_fed: null
+    posicoes:
+      renda_fixa_brasil: null
+      acoes_brasil: null
+      dolar: null
+      acoes_us: null
+      commodities: null
+    setores:
+      overweight: []
+      underweight: []
+    quotes: []
+    confianca: null
+    comentario: null
+
+  # ---------------------------------------------------------------------------
+  # KAPITALO
+  # ---------------------------------------------------------------------------
+  - nome: "Kapitalo"
+    carta_data: null
+    macro:
+      brasil_juros: null
+      brasil_fiscal: null
+      brasil_cambio: null
+      us_economia: null
+      us_fed: null
+    posicoes:
+      renda_fixa_brasil: null
+      acoes_brasil: null
+      dolar: null
+      acoes_us: null
+      commodities: null
+    setores:
+      overweight: []
+      underweight: []
+    quotes: []
+    confianca: null
+    comentario: null
+
+# =============================================================================
+# GESTORAS INTERNACIONAIS
+# =============================================================================
+
+gestoras_internacionais:
+  # ---------------------------------------------------------------------------
+  # OAKTREE (Howard Marks)
+  # ---------------------------------------------------------------------------
+  - nome: "Oaktree Capital"
+    carta_data: null
+
+    macro:
+      us_economia: null
+      us_fed: null
+      global_risk: null              # risk_on | neutro | risk_off
+      credit_cycle: null             # early | mid | late | recession
+
+    posicoes:
+      credit: null
+      equities: null
+      cash: null
+
+    quotes: []
+    confianca: null
+    comentario: null
+
+  # ---------------------------------------------------------------------------
+  # GMO (Jeremy Grantham)
+  # ---------------------------------------------------------------------------
+  - nome: "GMO"
+    carta_data: null
+
+    macro:
+      us_economia: null
+      us_fed: null
+      us_valuations: null            # cheap | fair | expensive | bubble
+      em_vs_dm: null                 # em_better | neutral | dm_better
+
+    posicoes:
+      us_equities: null
+      international_equities: null
+      emerging_markets: null
+      bonds: null
+
+    # GMO 7-year forecasts (se disponível)
+    forecasts:
+      us_large_cap: null             # Expected annual return %
+      us_small_cap: null
+      international_developed: null
+      emerging_markets: null
+      us_bonds: null
+
+    quotes: []
+    confianca: null
+    comentario: null
+
+  # ---------------------------------------------------------------------------
+  # AQR
+  # ---------------------------------------------------------------------------
+  - nome: "AQR"
+    carta_data: null
+
+    macro:
+      factor_outlook: null           # value | growth | balanced
+      volatility_regime: null        # low | normal | high
+
+    posicoes:
+      value_factor: null
+      momentum_factor: null
+      quality_factor: null
+
+    quotes: []
+    confianca: null
+    comentario: null
+
+# =============================================================================
+# RESUMO DO MÊS (Preencher após ler todas as cartas)
+# =============================================================================
+
+resumo_mensal:
+  # Consenso macro Brasil
+  consenso_brasil:
+    juros: null                      # Maioria das casas
+    fiscal: null
+    cambio: null
+
+  # Consenso macro US
+  consenso_us:
+    economia: null
+    fed: null
+
+  # Consenso posicionamento
+  consenso_posicoes:
+    renda_fixa_brasil: null
+    acoes_brasil: null
+    dolar: null
+    acoes_us: null
+
+  # Divergências importantes (listar)
+  divergencias:
+    - null
+
+  # Flags para review (se sua posição contradiz)
+  flags_review:
+    - null
+
+# =============================================================================
+# INSTRUÇÕES DE PREENCHIMENTO
+# =============================================================================
+#
+# 1. Ao ler cada carta, preencha a seção correspondente
+# 2. Use os valores padronizados:
+#    - Juros: dovish | neutro | hawkish
+#    - Fiscal: otimista | neutro | preocupado | pessimista
+#    - Posições: muito_vendido | vendido | neutro | comprado | muito_comprado
+#    - Economia: recessao | soft_landing | no_landing
+#
+# 3. Quotes: Apenas frases realmente relevantes (máx 3)
+#
+# 4. Confiança: 0-1, baseado em:
+#    - Clareza da mensagem
+#    - Track record recente
+#    - Quão convictos parecem
+#
+# 5. No final do mês, preencha resumo_mensal
+#
+# 6. Compare com suas posições e preencha flags_review se necessário
+#
+# =============================================================================

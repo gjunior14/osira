@@ -1,0 +1,184 @@
+data_atualizacao: '2026-02-10'
+letters:
+# =========================================================================
+# OAKTREE CAPITAL
+# =========================================================================
+- source: Oaktree Capital
+  author: Howard Marks
+  title: Nobody Knows (Yet Again)
+  url: https://www.oaktreecapital.com/insights/memo/nobody-knows-yet-again
+  date: '2025-04-09'
+  summary: Howard Marks compara tarifas Trump com GFC 2008 e Covid 2020. O impacto
+    é imprevisível mas potencialmente o maior desenvolvimento econômico das nossas
+    vidas. Cautela mas agir — decidir não agir é um ato em si. Ninguém sabe o que
+    as tarifas vão ser daqui 3 meses.
+  views:
+    macro_us: bearish
+    macro_global: bearish
+    equities_us: bearish
+    equities_intl: null
+    equities_em: null
+    bonds: bullish
+    value_vs_growth: value
+    risk_assessment: high
+  quotes:
+    - "If anyone thinks they know what a given tariff rate will be three months from now, I'll bet good money they're wrong"
+    - "The decision to not act – to leave a portfolio unchanged – should be scrutinized as critically as a decision to make changes"
+    - "When the Time Comes to Buy, You Won't Want To"
+
+- source: Oaktree Capital
+  author: Howard Marks
+  title: Ruminating on Asset Allocation
+  url: https://www.oaktreecapital.com/insights/memo/ruminating-on-asset-allocation
+  date: '2024-10-22'
+  summary: Marks argumenta que existem apenas 2 asset classes (ownership vs debt).
+    Com juros mais altos, credit investments voltaram a ser atrativos. A decisão
+    fundamental é o balanço entre offense (crescimento) e defense (preservação).
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: bearish
+    equities_intl: null
+    equities_em: null
+    bonds: bullish
+    value_vs_growth: value
+    risk_assessment: high
+  quotes:
+    - "At bottom, there are only two asset classes: ownership and debt"
+    - "Today credit expected returns are considerably higher and closer to equities"
+
+- source: Oaktree Capital
+  author: Howard Marks
+  title: Easy Money
+  url: https://www.oaktreecapital.com/insights/memo/easy-money
+  date: '2024-01-09'
+  summary: Howard Marks reflects on financial history, easy money's impact on investor
+    behavior, and its end. Suggests a change in the investment climate.
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: bearish
+    equities_intl: bullish
+    equities_em: null
+    bonds: bullish
+    value_vs_growth: value
+    risk_assessment: high
+  quotes: []
+
+# =========================================================================
+# AQR
+# =========================================================================
+- source: AQR
+  author: Portfolio Solutions Group
+  title: 2026 Capital Market Assumptions for Major Asset Classes
+  url: https://www.aqr.com/Insights/Research/Alternative-Thinking/2026-Capital-Market-Assumptions-for-Major-Asset-Classes
+  date: '2026-01-14'
+  summary: Retorno real esperado 60/40 global é 3.4%, ~1.5% acima do mínimo de 2021
+    mas bem abaixo da média histórica de ~5%. Risk premia comprimidos pelo 3o ano
+    consecutivo de rally em equities. Inclui discussão sobre currency hedging.
+  views:
+    macro_us: neutral
+    macro_global: neutral
+    equities_us: bearish
+    equities_intl: neutral
+    equities_em: null
+    bonds: neutral
+    value_vs_growth: null
+    risk_assessment: high
+  quotes:
+    - "The expected real return of a global 60/40 portfolio is 3.4%, well below the long-term U.S. average of nearly 5%"
+
+- source: AQR
+  author: null
+  title: Hold the Dip
+  url: https://www.aqr.com/Insights/Research/Alternative-Thinking/Hold-the-Dip
+  date: '2025-12-01'
+  summary: Buy the dip consistentemente underperforma buy-and-hold. Investidores
+    que tentam timing terão mais sucesso seguindo tendências do que lutando contra elas.
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: neutral
+    equities_intl: null
+    equities_em: null
+    bonds: null
+    value_vs_growth: null
+    risk_assessment: null
+  quotes:
+    - "Buy the Dip consistently underperforms a simple buy-and-hold approach"
+
+- source: AQR
+  author: null
+  title: 'Bond Market Focus: Yield Curves and Mean Reverting Rate Expectations'
+  url: https://www.aqr.com/Insights/Research/White-Papers/Bond-Market-Focus-Yield-Curves-and-Mean-Reverting-Rate-Expectations
+  date: '2025-10-07'
+  summary: A curva de juros reflete principalmente a tendência dos investidores de
+    esperar que taxas revertam para normas passadas. Explica tanto o poder preditivo
+    quanto os erros persistentes dos modelos de bonds.
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: null
+    equities_intl: null
+    equities_em: null
+    bonds: neutral
+    value_vs_growth: null
+    risk_assessment: null
+  quotes: []
+
+# =========================================================================
+# GMO
+# =========================================================================
+- source: GMO
+  author: Ben Inker
+  title: It's Probably a Bubble, But There Is Plenty Else to Invest In
+  url: https://www.gmo.com/americas/research-library/its-probably-a-bubble-but-there-is-plenty-else-to-invest-in_gmoquarterlyletter/
+  date: '2025-03-05'
+  summary: GMO Quarterly Letter — guia para navegar o boom de AI, bubble ou não.
+    Muitos risk assets alternativos para investir. US equities caras, internacional
+    e EM atrativos.
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: bearish
+    equities_intl: bullish
+    equities_em: bullish
+    bonds: null
+    value_vs_growth: value
+    risk_assessment: high
+  quotes: []
+
+- source: GMO
+  author: Fixed Income
+  title: 'GMO 7-Year Asset Class Forecast: 4Q 2025'
+  url: https://www.gmo.com/americas/research-library/gmo-7-year-asset-class-forecast-4q-2025_gmo7yearassetclassforecast/
+  date: '2025-03-05'
+  summary: GMO's 7-Year Asset Class Forecast as of December 31, 2025.
+  views:
+    macro_us: null
+    macro_global: null
+    equities_us: null
+    equities_intl: null
+    equities_em: null
+    bonds: null
+    value_vs_growth: null
+    risk_assessment: null
+  quotes: []
+
+# =========================================================================
+# CONSENSO US (calculado a partir das cartas acima)
+# =========================================================================
+# Oaktree: equities_us bearish, bonds bullish, risk high
+# AQR: equities_us bearish (retornos comprimidos), risk high
+# GMO: equities_us bearish (bubble), equities_intl/EM bullish, risk high
+#
+# CONSENSO:
+#   equities_us: BEARISH (3/3 casas)
+#   risk_level: HIGH (3/3 casas)
+#   equities_intl: BULLISH (GMO + Oaktree Easy Money)
+#   value_vs_growth: VALUE (todas que opinam)
+#   bonds: BULLISH (Oaktree post-sea-change)
+#
+# Implicação para modelo:
+#   - Manter/reforçar redução de equity allocation (letters_rv_adjustment)
+#   - Consenso US bearish → -0.39 score → STRONG_REDUCE signal
