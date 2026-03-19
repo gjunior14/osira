@@ -1,0 +1,6 @@
+# Excluir PDFs (779MB) - baixar via scripts
+*.pdf
+# Manter banco e docs
+!cartas.db
+!*.md
+!.gitignore
