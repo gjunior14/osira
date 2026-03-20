@@ -645,3 +645,167 @@ Letters_BR=-0.20  Letters_US=-0.39  Letters_fiscal=hawkish
 | 0 - 35 | br_heavy |
 | 35 - 65 | balanced |
 | 65 - 100 | us_heavy |
+
+---
+
+## 18. Ordem de Calculo (CRITICO para implementacao)
+
+Os scores tem dependencias. Esta e a ordem exata:
+
+```
+1. juro_real(bcb)                          # independente
+2. easing(bcb)                             # independente
+3. fiscal(bcb, market, letters)            # independente
+4. geo(bcb, market)                        # independente
+5. cred_hg(bcb, juro_real.value, anbima)   # depende de juro_real
+6. ciclo_br(bcb)                           # independente
+7. ciclo_us(market, fred)                  # independente
+8. pre_tilt(bcb, fiscal.value)             # depende de fiscal
+9. rv_br(letters, bcb, market, ibov_pl_percentile, fiscal.value)  # depende de fiscal
+10. rv_dm(market, letters, cape, cape_percentile, us_real_rate, bcb)  # independente
+11. rv_em(market, letters, cape_em_percentile, bcb)  # independente
+12. ouro(market, fred, bcb)                # independente
+
+--- Apos calcular todos os scores: ---
+
+13. regime = detect_regime(rv_br, rv_dm, rv_em, vix, fiscal, juro_real, ciclo_br,
+                           ibov_vs_ma200, sp500_vs_ma200, cds_5y)
+14. ntnb = ntnb_composite(juro_real, easing, fiscal, market, regime)  # depende de regime!
+```
+
+**NOTA:** ntnb_composite e o UNICO score que depende do regime.
+
+---
+
+## 19. Defaults quando dados sao NULL (essencial para backtest)
+
+Se um dado nao estiver disponivel, o engine usa estes defaults:
+
+| Variavel | Default | Impacto |
+|----------|---------|---------|
+| selic_meta | 0.0 | juro_real/easing/fiscal zerados |
+| focus_ipca | fallback: ipca_12m, senao 0.0 | |
+| focus_selic | fallback: selic_meta (sem corte) | easing = 0 |
+| focus_pib | 1.5 | neutro |
+| cds_5y | None → usa EMBI | fiscal fallback chain |
+| embi_brasil | None → usa gap cambial | fiscal fallback chain |
+| divida_bruta_pib | 78.0 | neutro |
+| ipca_12m | 3.0 | na meta |
+| ibc_br | 0.0 | neutro (50) |
+| inadimplencia_pf | 5.5 | |
+| inadimplencia_pj | 3.0 | |
+| fluxo_cambial_30d | 0.0 | neutro (55) |
+| selic_6m_ago | None → fallback formula | ver secao 10 |
+| ibovespa | 0.0 | MA signals = 50 |
+| ibovespa_ma200 | None → ma200_sig = 50.0 | |
+| ibovespa_ma100 | None → ma100_sig = 50.0 | |
+| sp500 | 0.0 | ma_val = 50 |
+| sp500_ma200 | None → ma_val = 50.0 | |
+| vix | 20.0 | neutro |
+| dxy | 100.0 | neutro (50) |
+| treasury_10y | 4.0 | |
+| treasury_2y | 3.85 | |
+| treasury_13w | 4.0 | |
+| move_index | 100.0 | |
+| hys_spread | 4.0 | |
+| gold_price | 2900.0 | |
+| gold_ma200 | None → ma200_sig = 50.0 | |
+| gold_ma100 | None → ma100_sig = 50.0 | |
+| gold_6m_ago | None → momentum = 50.0 | |
+| iron_ore | 100.0 | |
+| copper_price | 4.0 | |
+| eem_price | 44.0 | |
+| spy_price | 570.0 | |
+| eem_6m_ago | None → em_momentum = 50.0 | |
+| spy_6m_ago | None → em_momentum = 50.0 | |
+| ibov_12m_ago | None → opp = 45.0 | geo neutro |
+| sp500_12m_ago | None → opp = 45.0 | |
+| brl_12m_ago | None → opp = 45.0 | |
+| tips_10y | 1.5 | |
+| cpi_us_yoy | 2.5 | |
+| ism_pmi | 50.0 | neutro |
+| sahm_rule | 0.3 | neutro |
+| anbima (todo) | None → spread_signal = 50.0 | cred_hg neutro |
+| letters_equities_br | 0.0 | neutro |
+| letters_equities_us | 0.0 | neutro |
+| letters_equities_intl | 0.0 | neutro |
+| letters_fiscal_score | 50.0 | neutro |
+
+---
+
+## 20. NTN-B Strategy Selection (pos-scores)
+
+```
+max_year = 2028 + min(22, int(fiscal_score / 5))
+
+if ntnb_score >= 80: strategy='barbell', vertices=[2030, min(2040, max_year)]
+elif ntnb_score >= 60:
+    if easing >= 60: strategy='ladder_longo', vertices=[2030, min(2035, max_year)]
+    else:            strategy='ladder_curto', vertices=[2028, min(2030, max_year)]
+elif ntnb_score >= 40: strategy='bullet_curto', vertices=[min(2030, max_year)]
+else:                  strategy='cdi_only', vertices=[]
+```
+
+**Test vector (MockData):** ntnb=48.9, easing=42.8, fiscal=22.8
+- max_year = 2028 + min(22, int(22.8/5)) = 2028 + 4 = 2032
+- ntnb 48.9 >= 40 → strategy='bullet_curto', vertices=[min(2030, 2032)] = [2030]
+
+---
+
+## 21. Credit Params (pos-scores)
+
+```
+effective = min(credit_score, 20) if regime in ('risk_off','stagflation') else credit_score
+
+if effective >= 70: spread_min=1.2, rating='A', prazo_max=5
+elif effective >= 50: spread_min=1.5, rating='AA-', prazo_max=3
+else:                 spread_min=2.0, rating='AAA', prazo_max=2
+```
+
+**Test vector (MockData):** cred_hg=54.0, regime=risk_off
+- effective = min(54.0, 20) = 20.0 (cap por regime!)
+- 20.0 < 50 → rating='AAA', prazo_max=2
+
+---
+
+## 22. Notas para Backtest de 10-15 Anos
+
+### 22.1 Easing vs Tightening ao longo do tempo
+| Periodo | SELIC | Focus | cuts | easing | ciclo_br.monetary |
+|---------|-------|-------|------|--------|-------------------|
+| Jan/2016 | 14.25 | 13.00 | +1.25 | ~27 | 45-60 |
+| Jan/2017 | 13.75 | 10.00 | +3.75 | ~65 | 60-75 (queda) |
+| Jan/2018 | 6.75 | 6.50 | +0.25 | ~7 | 60-75 |
+| Jan/2019 | 6.50 | 6.25 | +0.25 | ~8 | 45-60 |
+| Jan/2020 | 4.50 | 4.25 | +0.25 | ~10 | 60-75 |
+| Mar/2020 | 3.75 | 2.75 | +1.00 | ~38 | 60-75 (COVID) |
+| Jan/2021 | 2.00 | 3.25 | -1.25 | **0** | 30-45 (inicio alta) |
+| Jan/2022 | 9.25 | 11.75 | -2.50 | **0** | 15-30 (alta forte) |
+| Jun/2022 | 13.25 | 13.75 | -0.50 | **0** | 15 (pico) |
+| Jan/2023 | 13.75 | 12.00 | +1.75 | ~35 | 45 (virada) |
+| Jan/2024 | 11.75 | 9.25 | +2.50 | ~50 | 60-75 (queda) |
+| Jan/2025 | 13.25 | 15.00 | -1.75 | **0** | 15-30 (alta) |
+| Jan/2026 | 15.00 | 12.25 | +2.75 | ~43 | 45 (virada) |
+
+### 22.2 Dados que NAO existem no backtest (proxies sugeridas)
+| Variavel | Problema | Proxy |
+|----------|---------|-------|
+| Letters consensus | So temos cartas de 2016+ | Para meses sem cartas: usar default 0.0 (neutro) |
+| CAPE_percentile | Nao tem serie temporal facil | Usar CAPE Shiller + calcular percentil rolling 20y |
+| CAPE_EM_percentile | Dificil de obter | Usar P/E do EEM + percentil historico |
+| Ibov_PL_percentile | Nao tem serie | Usar P/L Ibov Economatica + percentil rolling |
+| ANBIMA spreads | config estatico | Manter constante ou interpolar manual |
+| MOVE Index | Yahoo ^MOVE so desde ~2018 | Para pre-2018: usar VIX * 3.5 como proxy |
+| Sahm Rule | FRED SAHMREALTIME desde 1959 | OK |
+| HY_spread | FRED BAMLH0A0HYM2 desde 1996 | OK |
+| CDS_5Y Brasil | BCB 21619 — verificar inicio | Se indisponivel: usar EMBI (SGS 3545, desde 1994) |
+
+### 22.3 Discrepancia docs vs codigo (NTN-B stagflation)
+A metodologia PDF documenta pesos de stagflation para ntnb_composite:
+`(0.30, 0.10, 0.55, 0.05)` — priorizando fiscal.
+Mas o codigo usa pesos de neutral: `(0.40, 0.25, 0.20, 0.15)`.
+**Decisao:** implementar conforme o CODIGO (neutral weights para stagflation).
+
+### 22.4 ECY nao usado no rv_dm
+O codigo calcula `ecy = (1/CAPE - us_real_rate/100) * 100` mas NAO usa
+na formula do score — aparece apenas no texto de rationale. Ignorar no backtest.
